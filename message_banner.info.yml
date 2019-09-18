@@ -1,0 +1,5 @@
+name: Message Banner
+description: Display a message banner to site visitors.
+package: User interface
+
+core: 8.x
