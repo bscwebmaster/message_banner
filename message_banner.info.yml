@@ -2,4 +2,5 @@ name: Message Banner
 description: Display a message banner to site visitors.
 package: User interface
 
+type: module
 core: 8.x
