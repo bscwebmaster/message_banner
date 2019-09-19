@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Main module file for the Message Banner module.
+ */
+
+use Drupal\Core\Cache\Cache;
+
+/**
+ * Implements hook_theme().
+ */
+function message_banner_theme(array $existing, $type, $theme, $path): array {
+  return [
+    'message_banner' => [
+      'variables' => [
+        'message' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function message_banner_page_attachments(array &$attachments) {
+  // Don't display the banner on admin routes.
+  if (Drupal::service('router.admin_context')->isAdminRoute()) {
+    return;
+  }
+
+  $config = \Drupal::config('message_banner.settings');
+
+  // Don't attach to the page if the banner isn't enabled.
+  if (!$config->get('banner_enabled')) {
+    return;
+  }
+
+  $message = [
+    '#theme' => 'message_banner',
+    '#message' => check_markup(
+      $config->get('banner_text.value'),
+      $config->get('banner_text.format')
+    ),
+  ];
+
+  // Render the message, so it can be directly output in the JavaScript.
+  $message = Drupal::service('renderer')->renderRoot($message)->__toString();
+
+  $drupal_settings = [
+    'banner_text' => $message,
+    'banner_color' => $config->get('banner_color'),
+    'banner_timestamp' => Drupal::state()->get('banner_saved'),
+  ];
+
+  $attachments['#attached']['drupalSettings']['messageBanner'] = $drupal_settings;
+  $attachments['#attached']['library'][] = 'message_banner/message_banner';
+
+  $cache_tags = $attachments['#cache']['tags'] ?? [];
+  $attachments['#cache']['tags'] = Cache::mergeTags($cache_tags, $config->getCacheTags());
+}
+
+/**
+ * Implements template_preprocess_HOOK().
+ */
+function template_preprocess_message_banner(array &$variables) {
+}

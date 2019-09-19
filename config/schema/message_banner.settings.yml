@@ -1,0 +1,19 @@
+message_banner.settings:
+  type: config_entity
+  label: 'Message banner settings'
+  mapping:
+    banner_enabled:
+      type: integer
+      label: 'Banner enabled'
+    banner_color:
+      type: string
+      label: 'Banner color'
+    banner_text:
+      type: mapping
+      mapping:
+        value:
+          type: string
+          label: 'Banner text value'
+        format:
+          type: string
+          label: 'Banner text format'
