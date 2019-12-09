@@ -75,7 +75,15 @@
      */
     attachBannerToBody: function (bannerMarkup, bannerColor, context) {
       var $messageBanner = $(bannerMarkup);
-      $messageBanner.prependTo($('body', context));
+      var $skipLink = $('.skip-link', context);
+
+      // If there is a skip link, attach the banner after it.
+      if ($skipLink.length > 0) {
+        $skipLink.after($messageBanner);
+      }
+      else {
+        $messageBanner.prependTo($('body', context));
+      }
     },
 
     /**
