@@ -93,6 +93,18 @@ class MessageBannerSettingsForm extends ConfigFormBase {
       ],
     ];
 
+    $form['message_banner']['banner_enabled_on_admin_routes'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable banner on admin routes'),
+      '#description' => $this->t('If not checked, the banner will only appear on non-admin routes.'),
+      '#default_value' => $config->get('banner_enabled_on_admin_routes') ?: FALSE,
+      '#states' => [
+        'visible' => [
+          ':input[name="banner_enabled"]' => ['checked' => TRUE],
+        ]
+      ],
+    ];
+
     $form['message_banner']['banner_color'] = [
       '#type' => 'select',
       '#title' => $this->t('Banner color'),
@@ -123,6 +135,7 @@ class MessageBannerSettingsForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->config('message_banner.settings')
       ->set('banner_enabled', $form_state->getValue('banner_enabled'))
+      ->set('banner_enabled_on_admin_routes', $form_state->getValue('banner_enabled_on_admin_routes'))
       ->set('banner_color', $form_state->getValue('banner_color'))
       ->set('banner_text', $form_state->getValue('banner_text'))
       ->save();

@@ -24,12 +24,14 @@ function message_banner_theme(array $existing, $type, $theme, $path): array {
  * Implements hook_page_attachments().
  */
 function message_banner_page_attachments(array &$attachments) {
-  // Don't display the banner on admin routes.
-  if (Drupal::service('router.admin_context')->isAdminRoute()) {
-    return;
-  }
-
   $config = Drupal::config('message_banner.settings');
+
+  // Don't display the banner on admin routes.
+  if (!$config->get('banner_enabled_on_admin_routes')) {
+    if (Drupal::service('router.admin_context')->isAdminRoute()) {
+      return;
+    }
+  }
 
   // Don't attach to the page if the banner isn't enabled.
   if (!$config->get('banner_enabled')) {

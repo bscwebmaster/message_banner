@@ -5,6 +5,9 @@ message_banner.settings:
     banner_enabled:
       type: integer
       label: 'Banner enabled'
+    banner_enabled_on_admin_routes:
+      type: integer
+      label: 'Banner enabled on admin routes'
     banner_color:
       type: string
       label: 'Banner color'
