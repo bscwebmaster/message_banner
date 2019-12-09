@@ -143,12 +143,12 @@ class MessageBannerSettingsForm extends ConfigFormBase {
    */
   protected function getBannerColors(): array {
     $colors = [
-      '#b31a20' => $this->t('Red'),
-      '#f9ae23' => $this->t('Amber'),
-      '#00cc45' => $this->t('Green'),
-      '#111111' => $this->t('Black'),
-      '#888888' => $this->t('Gray'),
-      '#eeeeee' => $this->t('White'),
+      'default--red' => $this->t('Red'),
+      'default--amber' => $this->t('Amber'),
+      'default--green' => $this->t('Green'),
+      'default--black' => $this->t('Black'),
+      'default--gray' => $this->t('Gray'),
+      'default--white' => $this->t('White'),
     ];
 
     // Allow other developers to add extra colors, such as brand colors.

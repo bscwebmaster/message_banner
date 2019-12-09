@@ -75,14 +75,7 @@
      */
     attachBannerToBody: function (bannerMarkup, bannerColor, context) {
       var $messageBanner = $(bannerMarkup);
-      $messageBanner
-        .prependTo($('body', context))
-        .css('background-color', bannerColor);
-
-      // Check for white background and set the text color.
-      if (bannerColor === '#eeeeee') {
-        $('.message-banner__text', context).css('color', '#000000');
-      }
+      $messageBanner.prependTo($('body', context));
     },
 
     /**

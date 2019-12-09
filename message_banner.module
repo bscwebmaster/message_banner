@@ -29,7 +29,7 @@ function message_banner_page_attachments(array &$attachments) {
     return;
   }
 
-  $config = \Drupal::config('message_banner.settings');
+  $config = Drupal::config('message_banner.settings');
 
   // Don't attach to the page if the banner isn't enabled.
   if (!$config->get('banner_enabled')) {
@@ -49,7 +49,6 @@ function message_banner_page_attachments(array &$attachments) {
 
   $drupal_settings = [
     'banner_text' => $message,
-    'banner_color' => $config->get('banner_color'),
     'banner_timestamp' => Drupal::state()->get('banner_saved'),
   ];
 
@@ -64,4 +63,7 @@ function message_banner_page_attachments(array &$attachments) {
  * Implements template_preprocess_HOOK().
  */
 function template_preprocess_message_banner(array &$variables) {
+  // Add the banner color as a class.
+  $config = Drupal::config('message_banner.settings');
+  $variables['attributes']['class'][] = $config->get('banner_color');
 }

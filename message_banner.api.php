@@ -19,12 +19,15 @@
  *
  * @code
  *   $colors = [
- *     '#bada55' => t('A badass green'),
+ *     'badass' => t('A badass green'),
  *   ];
  * @endcode
  *
- * Where the key is a hex code (or other HTML-safe color value, such as 'gray'),
- * and the value is a human-readable option.
+ * Where the key is a string that can be used as a class, and the value is a
+ * human-readable option.
+ *
+ * This will add the class to the message banner, which can be used to style the
+ * banner appropriately for your theme.
  *
  * @param array $colors
  *   The default color list.
@@ -33,12 +36,11 @@
  */
 function hook_message_banner_colors_alter(array &$colors) {
   // Define a new color.
-  $colors['#bada55'] = t('A badass green');
+  $colors['badass'] = t('A badass green');
 
   // Replace an existing color.
-  $white = array_search(t('White'), $colors);
-  unset($colors[$white]);
-  $colors['#ffffff'] = t('White');
+  unset($colors['default--white']);
+  $colors['overridden-white'] = t('White');
 }
 
 /**
