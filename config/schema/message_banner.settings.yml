@@ -12,7 +12,7 @@ message_banner.settings:
       type: mapping
       mapping:
         value:
-          type: string
+          type: text
           label: 'Banner text value'
         format:
           type: string
