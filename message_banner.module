@@ -46,19 +46,24 @@ function message_banner_page_attachments(array &$attachments) {
     ),
   ];
 
-  // Render the message, so it can be directly output in the JavaScript.
-  $message = Drupal::service('renderer')->renderRoot($message)->__toString();
+  $user_storage = Drupal::entityTypeManager()->getStorage('user');
+  $user = $user_storage->load(Drupal::currentUser()->id());
 
-  $drupal_settings = [
-    'banner_text' => $message,
-    'banner_timestamp' => Drupal::state()->get('banner_saved'),
-  ];
+  if ($user->hasPermission('view message banner')) {
+    // Render the message, so it can be directly output in the JavaScript.
+    $message = Drupal::service('renderer')->renderRoot($message)->__toString();
 
-  $attachments['#attached']['drupalSettings']['messageBanner'] = $drupal_settings;
-  $attachments['#attached']['library'][] = 'message_banner/message_banner';
+    $drupal_settings = [
+      'banner_text' => $message,
+      'banner_timestamp' => Drupal::state()->get('banner_saved'),
+    ];
 
-  $cache_tags = $attachments['#cache']['tags'] ?? [];
-  $attachments['#cache']['tags'] = Cache::mergeTags($cache_tags, $config->getCacheTags());
+    $attachments['#attached']['drupalSettings']['messageBanner'] = $drupal_settings;
+    $attachments['#attached']['library'][] = 'message_banner/message_banner';
+
+    $cache_tags = $attachments['#cache']['tags'] ?? [];
+    $attachments['#cache']['tags'] = Cache::mergeTags($cache_tags, $config->getCacheTags());
+  }
 }
 
 /**

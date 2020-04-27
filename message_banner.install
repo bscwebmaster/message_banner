@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * Install, uninstall and update hooks for the message_banner module.
+ */
+
+/**
+ * Assign the new 'view message banner' permission to default roles.
+ */
+function message_banner_install() {
+  $role_storage = Drupal::entityTypeManager()->getStorage('role');
+  $roles = ['authenticated', 'anonymous'];
+
+  foreach ($roles as $role) {
+    $role = $role_storage->load($role);
+    $role->grantPermission('view message banner');
+    $role->save();
+  }
+}
