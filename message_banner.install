@@ -5,10 +5,24 @@
  */
 
 /**
- * Assign the new 'view message banner' permission to default roles.
+ * Implements hook_install().
  */
 function message_banner_install() {
-  $role_storage = Drupal::entityTypeManager()->getStorage('role');
+  $role_storage = Drupal::entityTypeManager()->getStorage('user_role');
+  $roles = ['authenticated', 'anonymous'];
+
+  foreach ($roles as $role) {
+    $role = $role_storage->load($role);
+    $role->grantPermission('view message banner');
+    $role->save();
+  }
+}
+
+/**
+ * Assign the new 'view message banner' permission to default roles.
+ */
+function message_banner_update_8001() {
+  $role_storage = Drupal::entityTypeManager()->getStorage('user_role');
   $roles = ['authenticated', 'anonymous'];
 
   foreach ($roles as $role) {
