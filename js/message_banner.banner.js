@@ -79,10 +79,10 @@
 
       // If there is a skip link, attach the banner after it.
       if ($skipLink.length > 0) {
-        $skipLink.after($messageBanner);
+        $skipLink.once().after($messageBanner);
       }
       else {
-        $messageBanner.prependTo($('body', context));
+        $messageBanner.once().prependTo($('body', context));
       }
     },
 
