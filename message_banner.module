@@ -75,6 +75,9 @@ function message_banner_page_attachments(array &$attachments) {
  * Implements template_preprocess_HOOK().
  */
 function template_preprocess_message_banner(array &$variables) {
+  $variables['attributes']['id'] = 'message-banner';
+  $variables['attributes']['class'][] = 'message-banner';
+
   // Add the banner color as a class.
   $config = Drupal::config('message_banner.settings');
   $variables['attributes']['class'][] = $config->get('banner_color');
