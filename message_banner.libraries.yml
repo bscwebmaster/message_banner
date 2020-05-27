@@ -9,4 +9,5 @@ message_banner:
   dependencies:
     - core/drupal
     - core/jquery
+    - core/jquery.once
     - core/drupalSettings

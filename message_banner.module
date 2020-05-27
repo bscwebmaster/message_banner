@@ -44,6 +44,11 @@ function message_banner_page_attachments(array &$attachments) {
       $config->get('banner_text.value'),
       $config->get('banner_text.format')
     ),
+    '#cache' => [
+      'contexts' => [
+        'user.roles',
+      ],
+    ],
   ];
 
   $user_storage = Drupal::entityTypeManager()->getStorage('user');
