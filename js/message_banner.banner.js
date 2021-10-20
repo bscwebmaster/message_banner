@@ -55,7 +55,7 @@
      *   bannerLastSavedTime.
      */
     shouldShowBanner: function (bannerLastSavedTime, userLastDismissedTime) {
-      if (Number.isNaN(userLastDismissedTime)) {
+      if (isNaN(userLastDismissedTime)) {
         return true;
       }
       else {

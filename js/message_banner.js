@@ -23,7 +23,7 @@
      * @param {object} context
      *   The DOM context.
      */
-    attach(context) {
+    attach: function (context) {
       var settings = drupalSettings.messageBanner;
       var messageBanner = Drupal.messageBanner;
 
