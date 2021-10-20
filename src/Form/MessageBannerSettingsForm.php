@@ -105,6 +105,14 @@ class MessageBannerSettingsForm extends ConfigFormBase {
       ],
     ];
 
+    $form['message_banner']['banner_show_again_minutes'] = [
+      '#type' => 'number',
+      '#step' => 1,
+      '#title' => $this->t('Minutes before showing banner after dismissing it'),
+      '#default_value' => $config->get('banner_show_again_minutes'),
+      '#description' => $this->t('The number of minutes to elapse after dimissing the banner before showing it again (0 to disable).'),
+    ];
+
     $form['message_banner']['banner_color'] = [
       '#type' => 'select',
       '#title' => $this->t('Banner color'),
@@ -138,6 +146,7 @@ class MessageBannerSettingsForm extends ConfigFormBase {
       ->set('banner_enabled_on_admin_routes', $form_state->getValue('banner_enabled_on_admin_routes'))
       ->set('banner_color', $form_state->getValue('banner_color'))
       ->set('banner_text', $form_state->getValue('banner_text'))
+      ->set('banner_show_again_minutes', $form_state->getValue('banner_show_again_minutes'))
       ->save();
 
     // Save the save time as a state value, so that config is not affected.

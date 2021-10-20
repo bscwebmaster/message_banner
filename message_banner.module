@@ -61,6 +61,7 @@ function message_banner_page_attachments(array &$attachments) {
     $drupal_settings = [
       'banner_text' => $message,
       'banner_timestamp' => Drupal::state()->get('banner_saved'),
+      'banner_show_again_minutes' => $config->get('banner_show_again_minutes') ?: 0,
     ];
 
     $attachments['#attached']['drupalSettings']['messageBanner'] = $drupal_settings;

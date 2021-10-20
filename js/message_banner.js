@@ -26,18 +26,38 @@
     attach: function (context) {
       var settings = drupalSettings.messageBanner;
       var messageBanner = Drupal.messageBanner;
+      var showAgainMinutes = settings.banner_show_again_minutes;
+      var currentTime = Math.floor(Date.now() / 1000);
 
       // If there's no local storage, bail now.
       if (messageBanner.testForLocalStorage() === false) {
         return;
       }
 
+      var bannerShouldAppear = false;
       var bannerLastSavedTime = settings.banner_timestamp;
       var userLastDismissedTime = messageBanner.getUserLastDismissedTime();
 
-      // If the user last dismissed this banner earlier than the time the banner
-      // was last saved, then show the banner.
-      if (messageBanner.shouldShowBanner(bannerLastSavedTime, userLastDismissedTime)) {
+
+      if (showAgainMinutes > 0) {
+        // If showAgainMinutes is greater than 0 and that time has elapsed since
+        // the banner is been dismissed, then the banner should show.
+        var showAgainTime = parseInt(userLastDismissedTime + (showAgainMinutes * 60));
+        bannerShouldAppear = messageBanner.shouldShowBanner(
+          currentTime,
+          showAgainTime
+        );
+      }
+      else {
+        // If the user last dismissed this banner earlier than the time the
+        // banner was last saved, then show the banner.
+        bannerShouldAppear = messageBanner.shouldShowBanner(
+          bannerLastSavedTime,
+          userLastDismissedTime
+        );
+      }
+
+      if (bannerShouldAppear) {
         messageBanner.attachBannerToBody(settings.banner_text, settings.banner_color, context);
 
         // Add the functionality for hiding the banner.
