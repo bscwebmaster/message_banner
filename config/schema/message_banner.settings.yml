@@ -15,11 +15,4 @@ message_banner.settings:
       type: string
       label: 'Banner color'
     banner_text:
-      type: mapping
-      mapping:
-        value:
-          type: text
-          label: 'Banner text value'
-        format:
-          type: string
-          label: 'Banner text format'
+      type: text_format
