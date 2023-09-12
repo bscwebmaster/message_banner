@@ -1,9 +1,7 @@
 name: Message Banner
 description: Display a message banner to site visitors.
 package: User interface
-php: 7.0
 type: module
-core_version_requirement: ^8 || ^9
-core: 8.x
+core_version_requirement: ^8.8 || ^9 || ^10
 
 configure: message_banner.settings
