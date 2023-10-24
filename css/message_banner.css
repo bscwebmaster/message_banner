@@ -1,12 +1,13 @@
 #top-banner {
-  background-color: green; }
+  background-color: green;
+  display: block;
+  color: white;
+  padding: 5px 10px;
+  text-align: center; }
   #top-banner a {
-    display: block;
-    color: white;
-    padding: 5px 10px;
-    text-decoration: none;
-    text-align: center; }
+    color: white; }
     #top-banner a:hover {
-      background-color: #6B4B18; }
+      background-color: #6B4B18;
+      text-decoration: none; }
 
 /*# sourceMappingURL=message_banner.css.map */
