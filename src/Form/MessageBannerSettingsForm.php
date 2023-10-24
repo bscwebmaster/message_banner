@@ -105,15 +105,16 @@ class MessageBannerSettingsForm extends ConfigFormBase {
       ],
     ];
 
-    $form['message_banner']['banner_show_again_minutes'] = [
+/*    $form['message_banner']['banner_show_again_minutes'] = [
       '#type' => 'number',
       '#step' => 1,
       '#title' => $this->t('Minutes before showing banner after dismissing it'),
       '#default_value' => $config->get('banner_show_again_minutes'),
       '#description' => $this->t('The number of minutes to elapse after dimissing the banner before showing it again (0 to disable).'),
     ];
+*/
 
-    $form['message_banner']['banner_color'] = [
+/*    $form['message_banner']['banner_color'] = [
       '#type' => 'select',
       '#title' => $this->t('Banner color'),
       '#description' => $this->t('Choose the background color for the banner.'),
@@ -125,6 +126,7 @@ class MessageBannerSettingsForm extends ConfigFormBase {
         ]
       ],
     ];
+ */
 
     $form['message_banner']['banner_text'] = [
       '#type' => 'text_format',

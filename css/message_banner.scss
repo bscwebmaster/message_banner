@@ -1,0 +1,17 @@
+#top-banner {
+  background-color: green;
+
+  a {
+    display: block;
+    color: white;
+//    font-family: $primary-font-stack 11px/18px;
+    padding: 5px 10px;
+    text-decoration: none;
+    text-align: center;
+
+    &:hover {
+      background-color: #6B4B18;
+    }
+  }
+
+}
